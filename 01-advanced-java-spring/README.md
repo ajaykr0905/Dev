@@ -1,4 +1,4 @@
-# 01 - Advanced Java & Spring Boot
+# 01 - Advanced Java & Spring Boot.
 
 ## Purpose
 

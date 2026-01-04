@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: api
+  
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/appdb
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/appdb
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      search:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+
+logging:
+  level:
+    com.example: DEBUG
+    io.r2dbc: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+

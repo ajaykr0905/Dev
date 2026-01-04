@@ -1,0 +1,7 @@
+apiVersion: v2
+name: spring-boot-app
+description: Helm chart for Spring Boot applications
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+

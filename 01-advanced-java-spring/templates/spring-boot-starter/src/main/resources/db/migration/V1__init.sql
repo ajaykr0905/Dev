@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS entities (
 CREATE INDEX idx_entities_active ON entities(active);
 CREATE INDEX idx_entities_name ON entities(name);
 
+

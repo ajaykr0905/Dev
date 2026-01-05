@@ -11,3 +11,4 @@ public interface EntityRepository extends ReactiveCrudRepository<Entity, Long> {
     Flux<Entity> findByNameContainingIgnoreCase(String name);
 }
 
+

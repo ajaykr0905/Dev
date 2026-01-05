@@ -14,3 +14,4 @@ spec:
   selector:
     {{- include "spring-boot-app.selectorLabels" . | nindent 4 }}
 
+

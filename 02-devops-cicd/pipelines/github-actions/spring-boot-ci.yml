@@ -41,7 +41,7 @@ jobs:
           cache: 'maven'
       
       - name: Run tests
-        run: ./mvnw verify -B
+        run: mvn verify -B
         env:
           SPRING_R2DBC_URL: r2dbc:postgresql://localhost:5432/testdb
           SPRING_R2DBC_USERNAME: test
@@ -96,7 +96,7 @@ jobs:
           cache: 'maven'
       
       - name: Build JAR
-        run: ./mvnw package -DskipTests -B
+        run: mvn package -DskipTests -B
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -146,7 +146,7 @@ jobs:
       
       - name: Deploy
         run: |
-          helm upgrade --install app ./helm \
+          helm upgrade --install app ./03-kubernetes-orchestration/helm-charts/spring-boot-app \
             --namespace staging \
             --set image.tag=${{ github.sha }} \
             --wait --timeout=5m
@@ -171,7 +171,7 @@ jobs:
       
       - name: Deploy
         run: |
-          helm upgrade --install app ./helm \
+          helm upgrade --install app ./03-kubernetes-orchestration/helm-charts/spring-boot-app \
             --namespace production \
             --set image.tag=${{ github.sha }} \
             --set replicaCount=3 \
